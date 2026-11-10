@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Auxiliares Educacionais – Informações para o MP</title>
+<style>
+:root{
+  --navy:#1f2a44; --navy2:#2d3d63; --ink:#16181d; --muted:#5a5f6b; --line:#d5d9e0;
+  --bg:#f4f5f8; --card:#ffffff; --soft:#eef0f4; --warn-bg:#fff4e5; --warn:#8a4b00;
+  --ok:#1e6b3a; --ok-bg:#e8f5ec; --err:#b3261e; --err-bg:#fdecea; --focus:#3b6fd8;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif}
+header{background:var(--navy);color:#fff;padding:22px 16px 20px}
+header .wrap{max-width:760px;margin:0 auto}
+header .org{font-size:13px;letter-spacing:.04em;text-transform:uppercase;opacity:.85}
+header h1{font-size:22px;line-height:1.25;margin:6px 0 6px}
+header p{margin:0;font-size:14px;opacity:.92}
+main{max-width:760px;margin:0 auto;padding:16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 16px;margin:0 0 14px}
+.card h2{font-size:18px;margin:0 0 4px;color:var(--navy)}
+.card h2 .n{display:inline-block;min-width:26px;height:26px;line-height:26px;text-align:center;border-radius:50%;background:var(--navy);color:#fff;font-size:14px;margin-right:8px;vertical-align:1px}
+.card .hint{color:var(--muted);font-size:14px;margin:0 0 12px}
+.notice{border-radius:10px;padding:12px 14px;font-size:14px;margin:10px 0}
+.notice.warn{background:var(--warn-bg);color:var(--warn)}
+.notice.info{background:var(--soft);color:var(--ink)}
+.notice.ok{background:var(--ok-bg);color:var(--ok)}
+.notice.err{background:var(--err-bg);color:var(--err)}
+label.f{display:block;font-weight:600;font-size:15px;margin:14px 0 6px}
+label.f .req{color:var(--err)}
+label.f small{display:block;font-weight:400;color:var(--muted);font-size:13px}
+input[type=text],input[type=email],input[type=tel],input[type=date],select,textarea{
+  width:100%;font:inherit;padding:11px 12px;border:1px solid #b9bfca;border-radius:9px;background:#fff;color:var(--ink)}
+textarea{min-height:88px;resize:vertical}
+input:focus,select:focus,textarea:focus,button:focus-visible,.opt input:focus-visible+span{outline:3px solid var(--focus);outline-offset:1px}
+.invalid{border-color:var(--err)!important;background:#fffafa}
+.errmsg{color:var(--err);font-size:13px;margin-top:4px;display:none}
+.errmsg.show{display:block}
+.row{display:grid;grid-template-columns:1fr;gap:0 14px}
+@media(min-width:620px){.row.two{grid-template-columns:1fr 1fr}}
+.opts{display:flex;flex-direction:column;gap:8px}
+.opt{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border:1px solid var(--line);border-radius:9px;background:#fff;cursor:pointer}
+.opt input{margin-top:4px;width:18px;height:18px;flex:none}
+.opt span{font-size:15px}
+.opt span small{display:block;color:var(--muted);font-size:13px}
+.inline .opts{flex-direction:row;flex-wrap:wrap}
+.inline .opt{flex:1 1 120px}
+.cond{display:block;border-left:3px solid var(--soft);padding-left:12px;margin-top:6px}
+.cond .se{font-size:14px;color:var(--muted);font-style:italic;margin:12px 0 0}
+.files{margin-top:8px}
+.filebtn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border:1px dashed var(--navy2);border-radius:9px;color:var(--navy);background:#f7f8fb;font-weight:600;cursor:pointer;font-size:15px}
+.filebtn input{display:none}
+.flist{list-style:none;padding:0;margin:8px 0 0}
+.flist li{display:flex;justify-content:space-between;gap:10px;align-items:center;font-size:14px;padding:7px 10px;background:var(--soft);border-radius:8px;margin-bottom:6px;word-break:break-all}
+.flist button{flex:none;border:0;background:transparent;color:var(--err);font-weight:700;font-size:14px;cursor:pointer;padding:4px 6px}
+.btn{display:block;width:100%;font:inherit;font-weight:700;font-size:17px;padding:14px 16px;border-radius:10px;border:0;background:var(--navy);color:#fff;cursor:pointer;text-align:center;text-decoration:none;margin-top:10px}
+.btn.sec{background:#fff;color:var(--navy);border:2px solid var(--navy)}
+.btn[disabled]{opacity:.6;cursor:progress}
+.steps{padding-left:20px;margin:8px 0}
+.steps li{margin-bottom:8px}
+.addr{display:flex;gap:8px;align-items:center;flex-wrap:wrap;background:var(--soft);border-radius:9px;padding:10px 12px;font-weight:700;word-break:break-all}
+.addr button{font:inherit;font-size:14px;font-weight:600;border:1px solid var(--navy);color:var(--navy);background:#fff;border-radius:8px;padding:6px 10px;cursor:pointer}
+footer{max-width:760px;margin:0 auto;padding:4px 16px 40px;color:var(--muted);font-size:13px}
+.provas{background:#f7f8fb;border:1px solid var(--line);border-left:4px solid var(--navy);border-radius:9px;padding:12px 14px;margin:14px 0 4px;font-size:14px}
+.provas .pt{font-weight:700;color:var(--navy);margin-bottom:6px;font-size:15px}
+.provas ul{margin:0;padding-left:18px}
+.provas li{margin-bottom:5px}
+.provas .pn{margin-top:8px;color:var(--err)}
+.provas .pd{margin-top:8px;color:var(--muted)}
+#envio b,#pkginfo,.flist li span{overflow-wrap:anywhere;word-break:break-word}
+.tbl{margin-top:6px}
+.trow{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:8px;margin-bottom:8px;align-items:end}
+.trow.thead span{font-size:13px;line-height:1.25;color:var(--muted);font-weight:600}
+.addrow{font:inherit;font-size:15px;font-weight:600;color:var(--navy);background:#fff;border:1px dashed var(--navy2);border-radius:9px;padding:9px 14px;cursor:pointer}
+.hidden{display:none!important}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <div class="org">SINDSERM Teresina · Assessoria Jurídica</div>
+  <h1>Auxiliares Educacionais: informações para o Ministério Público</h1>
+  <p>Procedimento Administrativo nº 69/2026 (SIMP 001806-426/2026) – 38ª Promotoria de Justiça de Teresina · audiência em 18/11/2026</p>
+</div></header>
+
+<main>
+<section class="card">
+  <p style="margin-top:0">O Ministério Público marcou audiência para <b>18/11/2026</b> sobre o enquadramento dos Auxiliares Educacionais no magistério (Lei nº 15.326/2026), os desvios de função e a jornada, e pediu ao Sindicato <b>informações e documentos</b>. Suas respostas ajudam a mostrar a realidade da rede.</p>
+  <div class="notice info"><b>Como funciona:</b> você preenche, anexa os documentos e toca em <b>“Gerar pacote”</b>. O formulário monta um arquivo único <b>no seu próprio aparelho</b> (nada fica guardado nesta página), e você o envia por e-mail para a Assessoria Jurídica. Leva cerca de 10 minutos.</div>
+  <div class="notice warn"><b>Proteção das crianças:</b> não envie fotos, vídeos nem laudos de crianças. Relatórios, portfólios, avaliações, registros e prints podem ser enviados mesmo que tenham nomes de crianças, <b>desde que você cubra (tarje) os nomes antes de enviar</b>.</div>
+  <div class="provas"><div class="pt">Como fazer a prova valer mais</div><ul>
+    <li><b>Prints de conversa</b> devem mostrar a data, a hora, quem enviou e a mensagem inteira. Não recorte nem edite; se precisar, mande dois ou três prints em sequência.</li>
+    <li><b>Documentos</b> (diplomas, fichas, folhas de ponto, circulares): fotografe a folha inteira, com boa luz e leitura nítida, ou envie o PDF.</li>
+    <li><b>Ordens dadas só de boca</b> também contam: descreva com detalhes (data, turma, quem mandou, por quanto tempo) e, se possível, peça a um colega que presenciou uma declaração assinada.</li>
+    <li><b>Declarações</b> assinadas (de colegas, da direção ou da coordenação) e <b>quadros de horários ou de atividades</b> da turma ou da unidade também valem como prova.</li>
+    <li><b>Como tarjar o nome de uma criança:</b> cubra o nome com caneta preta ou com um papel antes de fotografar, ou use a ferramenta de edição ou de marcação do celular para passar uma tarja preta sobre o nome. Confira na foto se o nome ficou ilegível.</li>
+    <li>Em cada ponto abaixo há uma lista do que serve como prova. Envie o que tiver; não é preciso ter tudo.</li>
+  </ul></div>
+  <p class="hint" style="margin:10px 0 0">Campos com <span style="color:var(--err)">*</span> são obrigatórios. Nas demais seções, responda só o que se aplica a você.</p>
+</section>
+
+<form id="f" novalidate>
+
+<!-- 1. IDENTIFICAÇÃO -->
+<section class="card" id="s1">
+  <h2><span class="n">1</span>Identificação</h2>
+  <p class="hint">Seus dados servem para o Sindicato conferir e organizar as respostas. Ao Ministério Público, as informações serão apresentadas de forma consolidada.</p>
+  <label class="f" for="nome">Nome completo <span class="req">*</span></label>
+  <input type="text" id="nome" name="nome" autocomplete="name" required>
+  <div class="errmsg" data-for="nome">Informe o nome completo.</div>
+  <div class="row two">
+    <div>
+      <label class="f" for="cpf">CPF <span class="req">*</span></label>
+      <input type="text" id="cpf" name="cpf" inputmode="numeric" placeholder="000.000.000-00" maxlength="14" required>
+      <div class="errmsg" data-for="cpf">CPF inválido. Confira os números.</div>
+    </div>
+    <div>
+      <label class="f" for="matricula">Matrícula <span class="req">*</span></label>
+      <input type="text" id="matricula" name="matricula" inputmode="numeric" required>
+      <div class="errmsg" data-for="matricula">Informe a matrícula.</div>
+    </div>
+  </div>
+  <div class="row two">
+    <div>
+      <label class="f" for="email">E-mail <span class="req">*</span></label>
+      <input type="email" id="email" name="email" autocomplete="email" required>
+      <div class="errmsg" data-for="email">Informe um e-mail válido.</div>
+    </div>
+    <div>
+      <label class="f" for="telefone">Telefone / WhatsApp <span class="req">*</span></label>
+      <input type="tel" id="telefone" name="telefone" inputmode="tel" placeholder="(86) 90000-0000" autocomplete="tel" required>
+      <div class="errmsg" data-for="telefone">Informe o telefone com DDD.</div>
+    </div>
+  </div>
+  <label class="f" for="cmei">CMEI / unidade de lotação <span class="req">*</span></label>
+  <input type="text" id="cmei" name="cmei" required>
+  <div class="errmsg" data-for="cmei">Informe a unidade.</div>
+  <div class="row two">
+    <div>
+      <label class="f" for="turma">Turma(s) em que atua<small>ex.: Berçário, Maternal I, Pré I</small></label>
+      <input type="text" id="turma" name="turma">
+    </div>
+    <div>
+      <label class="f" for="posse">Data da posse<small>se souber</small></label>
+      <input type="date" id="posse" name="posse">
+    </div>
+  </div>
+</section>
+
+<!-- 2. FORMAÇÃO -->
+<section class="card" id="s2">
+  <h2><span class="n">2</span>Formação</h2>
+  <p class="hint">O Ministério Público considera a formação exigida pela LDB (curso normal/magistério de nível médio ou licenciatura). Marque tudo o que você tem ou está cursando.</p>
+  <div class="opts" id="formacao">
+    <label class="opt"><input type="checkbox" name="form" value="ensino_medio_regular"><span>Ensino médio regular</span></label>
+    <label class="opt"><input type="checkbox" name="form" value="normal_concluido"><span>Curso normal / magistério de nível médio <small>concluído</small></span></label>
+    <label class="opt"><input type="checkbox" name="form" value="pedagogia_concluida"><span>Licenciatura em Pedagogia <small>concluída</small></span></label>
+    <label class="opt"><input type="checkbox" name="form" value="outra_licenciatura" data-cond="c_outra"><span>Outra licenciatura <small>concluída</small></span></label>
+    <label class="opt"><input type="checkbox" name="form" value="cursando" data-cond="c_cursando"><span>Estou cursando Pedagogia, outra licenciatura ou magistério</span></label>
+    <label class="opt"><input type="checkbox" name="form" value="pos_educacao"><span>Pós-graduação na área de educação</span></label>
+  </div>
+  <div class="errmsg" data-for="formacao">Marque ao menos uma opção.</div>
+  <div class="cond" id="c_outra">
+    <p class="se">Se marcou “Outra licenciatura”:</p>
+    <label class="f" for="outra_curso">Qual licenciatura?</label>
+    <input type="text" id="outra_curso">
+  </div>
+  <div class="cond" id="c_cursando">
+    <p class="se">Se está cursando:</p>
+    <div class="row two">
+      <div><label class="f" for="cursando_curso">Curso e instituição</label><input type="text" id="cursando_curso"></div>
+      <div><label class="f" for="cursando_prev">Previsão de conclusão<small>mês/ano</small></label><input type="text" id="cursando_prev" placeholder="ex.: 12/2027"></div>
+    </div>
+  </div>
+  <div class="provas"><div class="pt">O que você pode enviar como prova</div><ul><li>Diploma de licenciatura (Pedagogia ou outra), frente e verso, ou certificado de conclusão com histórico escolar.</li><li>Diploma ou certificado do <b>curso normal / magistério de nível médio</b>, ou histórico escolar que mostre essa habilitação.</li><li>Se ainda está estudando: <b>declaração de matrícula</b> atualizada ou comprovante do semestre em curso, com a previsão de conclusão.</li><li>Certificado de pós-graduação na área de educação, se tiver.</li></ul><div class="pd"><b>Dica:</b> o certificado de ensino médio regular não precisa ser enviado.</div></div>
+  <div class="files" data-field="formacao">
+    <label class="filebtn">＋ Anexar diploma, certificado ou declaração de matrícula<input type="file" accept="image/*,application/pdf" multiple></label>
+    <ul class="flist"></ul>
+  </div>
+</section>
+
+<!-- 3. REGÊNCIA SOLITÁRIA -->
+<section class="card" id="s3">
+  <h2><span class="n">3</span>Ficou sozinho(a) com a turma, sem professor(a)?</h2>
+  <p class="hint">Ou seja: assumiu a turma no lugar do professor, sem a presença dele.</p>
+  <div class="inline"><div class="opts">
+    <label class="opt"><input type="radio" name="reg" value="sim" data-cond="c_reg"><span>Sim</span></label>
+    <label class="opt"><input type="radio" name="reg" value="nao"><span>Não</span></label>
+  </div></div>
+  <div class="cond" id="c_reg">
+    <p class="se">Se respondeu “Sim”, conte os detalhes e anexe as provas:</p>
+    <label class="f" for="reg_freq">Com que frequência?</label>
+    <select id="reg_freq"><option value="">Selecione</option><option>Uma vez</option><option>Algumas vezes</option><option>Toda semana</option><option>Todos os dias</option><option>Por um período longo (semanas ou meses)</option></select>
+    <label class="f" for="reg_periodo">Quando? <small>datas ou período aproximado, ex.: março a junho de 2026</small></label>
+    <input type="text" id="reg_periodo">
+    <label class="f">Por quê? <small>marque o que se aplica</small></label>
+    <div class="opts">
+      <label class="opt"><input type="checkbox" name="reg_motivo" value="falta_do_professor"><span>Falta do professor</span></label>
+      <label class="opt"><input type="checkbox" name="reg_motivo" value="licenca_do_professor"><span>Licença ou afastamento do professor</span></label>
+      <label class="opt"><input type="checkbox" name="reg_motivo" value="turma_sem_professor"><span>A turma não tinha professor (vaga não preenchida)</span></label>
+      <label class="opt"><input type="checkbox" name="reg_motivo" value="outro"><span>Outro motivo</span></label>
+    </div>
+    <label class="f" for="reg_quem">Quem determinou?</label>
+    <select id="reg_quem"><option value="">Selecione</option><option>Direção</option><option>Coordenação pedagógica</option><option>SEMEC</option><option>Ninguém determinou formalmente</option><option>Outro</option></select>
+    <label class="f">Como a ordem foi dada?</label>
+    <div class="opts">
+      <label class="opt"><input type="checkbox" name="reg_forma" value="verbal"><span>Verbalmente</span></label>
+      <label class="opt"><input type="checkbox" name="reg_forma" value="whatsapp"><span>Por WhatsApp</span></label>
+      <label class="opt"><input type="checkbox" name="reg_forma" value="escrito"><span>Por escrito (memorando, escala, e-mail)</span></label>
+    </div>
+    <label class="f" for="reg_desc">Comentários e detalhes <small>o que aconteceu, quando, por quanto tempo, quem determinou, quem estava presente</small></label>
+    <textarea id="reg_desc" maxlength="2500"></textarea>
+    <div class="provas"><div class="pt">O que você pode enviar como prova</div><ul><li><b>Print da mensagem</b> (WhatsApp, e-mail) em que a direção ou a coordenação mandou você “ficar com a turma” ou “assumir a sala”, mostrando data, hora e quem enviou.</li><li><b>Escala, quadro de turmas, quadro de horários ou quadro de atividades</b> em que você aparece sozinho(a) como responsável pela turma.</li><li><b>Diário ou registro de frequência da turma</b> preenchido por você nesses dias (cubra os nomes das crianças antes de enviar).</li><li>Comunicado aos pais avisando que você ficaria com a turma.</li><li><b>Declaração assinada</b> por colega, pela direção ou pela coordenação, com data, turma e o que aconteceu.</li><li>Sem documento? Descreva no campo acima com o máximo de detalhes: datas, turma, quem determinou, quantos dias.</li></ul><div class="pn"><b>Não envie:</b> fotos ou vídeos da sala com crianças.</div></div>
+  <div class="files" data-field="regencia">
+      <label class="filebtn">＋ Anexar provas (prints, escalas, quadros, declarações)<input type="file" accept="image/*,application/pdf" multiple></label>
+      <ul class="flist"></ul>
+    </div>
+  </div>
+</section>
+
+<!-- 4. ATUAÇÃO PEDAGÓGICA -->
+<section class="card" id="s4">
+  <h2><span class="n">4</span>Atuação pedagógica com o(a) professor(a)</h2>
+  <p class="hint">Atividades educativas que você faz junto com o professor.</p>
+  <label class="f">Participa do planejamento das atividades?</label>
+  <div class="inline"><div class="opts">
+    <label class="opt"><input type="radio" name="ped_plan" value="sim"><span>Sim</span></label>
+    <label class="opt"><input type="radio" name="ped_plan" value="as_vezes"><span>Às vezes</span></label>
+    <label class="opt"><input type="radio" name="ped_plan" value="nao"><span>Não</span></label>
+  </div></div>
+  <label class="f">Elabora ou assina relatórios, portfólios ou avaliações das crianças?</label>
+  <div class="inline"><div class="opts">
+    <label class="opt"><input type="radio" name="ped_reg" value="sim"><span>Sim</span></label>
+    <label class="opt"><input type="radio" name="ped_reg" value="as_vezes"><span>Às vezes</span></label>
+    <label class="opt"><input type="radio" name="ped_reg" value="nao"><span>Não</span></label>
+  </div></div>
+  <label class="f">Já foi convocado(a) para formação pedagógica ou planejamento pela SEMEC ou pela escola?</label>
+  <div class="inline"><div class="opts">
+    <label class="opt"><input type="radio" name="ped_form" value="sim"><span>Sim</span></label>
+    <label class="opt"><input type="radio" name="ped_form" value="nao"><span>Não</span></label>
+  </div></div>
+  <label class="f" for="ped_desc">Comentários e detalhes <small>que atividades você faz com as crianças e com o professor</small></label>
+  <textarea id="ped_desc" maxlength="2500"></textarea>
+  <div class="provas"><div class="pt">O que você pode enviar como prova</div><ul><li><b>Convocação</b> (ofício, e-mail, print) para formação continuada, planejamento ou reunião pedagógica da SEMEC ou da escola em que você foi chamado(a).</li><li><b>Certificado de participação</b> em formação oferecida pela SEMEC.</li><li>Planejamento ou plano de atividades em que você aparece como responsável ou coautor(a).</li><li><b>Relatório de desenvolvimento, portfólio ou ficha de avaliação</b> feito ou assinado por você. Pode enviar mesmo que o documento tenha o nome das crianças, <b>desde que você cubra (tarje) os nomes antes do envio</b>.</li><li><b>Quadro de atividades ou rotina da turma</b> em que aparecem as tarefas pedagógicas que você realiza.</li><li><b>Declaração</b> da direção, da coordenação ou de colega sobre as atividades educativas que você realiza.</li><li>Print de orientação da coordenação pedindo que você elabore atividades, relatórios ou registros.</li></ul><div class="pn"><b>Não envie:</b> fotos ou vídeos de crianças.</div></div>
+  <div class="files" data-field="pedagogica">
+    <label class="filebtn">＋ Anexar convocações, planejamentos, relatórios, quadros ou declarações<input type="file" accept="image/*,application/pdf" multiple></label>
+    <ul class="flist"></ul>
+  </div>
+</section>
+
+<!-- 5. EDUCAÇÃO ESPECIAL -->
+<section class="card" id="s5">
+  <h2><span class="n">5</span>Crianças da educação especial</h2>
+  <p class="hint">Aqui só números e informações gerais. <b>Não informe nome nem laudo de nenhuma criança.</b></p>
+  <label class="f">Nas turmas em que você atua, quantas crianças são público-alvo da educação especial (com laudo) e quantos profissionais de apoio há em cada turma?
+    <small>Informe só a <b>quantidade</b>, em números. Uma linha por turma; se atua em mais de uma, toque em “Adicionar outra turma”. “Profissional de apoio” é o profissional de apoio escolar, cuidador(a) ou mediador(a) que acompanha essas crianças. Se não houver nenhum, escreva 0.</small></label>
+  <div class="tbl" id="esp_turmas">
+    <div class="trow thead" aria-hidden="true"><span>Turma</span><span>Quantidade de crianças da educação especial (com laudo)</span><span>Quantidade de profissionais de apoio</span></div>
+    <div class="trow"><input type="text" class="t_turma" aria-label="Turma" placeholder="ex.: Pré I"><input type="text" class="t_criancas" inputmode="numeric" aria-label="Quantidade de crianças da educação especial (com laudo) nesta turma"><input type="text" class="t_apoio" inputmode="numeric" aria-label="Quantidade de profissionais de apoio nesta turma"></div>
+  </div>
+  <button type="button" class="addrow" id="esp_add">＋ Adicionar outra turma</button>
+  <label class="f" style="margin-top:18px">Você acompanha com exclusividade uma criança público-alvo da educação especial?</label>
+  <div class="inline"><div class="opts">
+    <label class="opt"><input type="radio" name="esp" value="sim" data-cond="c_esp"><span>Sim</span></label>
+    <label class="opt"><input type="radio" name="esp" value="nao"><span>Não</span></label>
+  </div></div>
+  <div class="cond" id="c_esp">
+    <p class="se">Se respondeu “Sim”, conte os detalhes e anexe as provas:</p>
+    <label class="f" for="esp_desde">Desde quando?</label>
+    <input type="text" id="esp_desde" placeholder="ex.: fevereiro de 2026">
+    <label class="f">A unidade tem profissional de apoio escolar ou cuidador para essa função?</label>
+    <div class="inline"><div class="opts">
+      <label class="opt"><input type="radio" name="esp_apoio" value="sim"><span>Sim</span></label>
+      <label class="opt"><input type="radio" name="esp_apoio" value="nao"><span>Não</span></label>
+      <label class="opt"><input type="radio" name="esp_apoio" value="nao_sei"><span>Não sei</span></label>
+    </div></div>
+    <label class="f" for="esp_quem">Quem determinou?</label>
+    <select id="esp_quem"><option value="">Selecione</option><option>Direção</option><option>Coordenação pedagógica</option><option>SEMEC</option><option>Ninguém determinou formalmente</option><option>Outro</option></select>
+    <label class="f" for="esp_desc">Comentários e detalhes <small>o que você faz, desde quando, em que horários, quem determinou</small></label>
+    <textarea id="esp_desc" maxlength="2500"></textarea>
+    <div class="provas"><div class="pt">O que você pode enviar como prova</div><ul><li><b>Print ou documento</b> em que a direção ou a SEMEC determina que você acompanhe a criança com exclusividade.</li><li>Escala ou quadro de lotação que indique essa função.</li><li>Resposta da escola ou da SEMEC informando que <b>não há profissional de apoio escolar ou cuidador</b> na unidade.</li><li><b>Quadro de horários ou de atividades</b> que mostre você nessa função.</li><li><b>Quadro de turmas ou relação dos profissionais de apoio</b> da unidade, que mostre quantas crianças da educação especial há em cada turma e quem as acompanha (cubra os nomes das crianças).</li><li><b>Declaração assinada</b> por colega, pela direção ou pela coordenação que confirme a situação.</li></ul><div class="pn"><b>Não envie:</b> laudo, relatório médico, nome, foto ou qualquer dado de saúde da criança. Basta dizer “criança público-alvo da educação especial”.</div></div>
+  <div class="files" data-field="educacao_especial">
+      <label class="filebtn">＋ Anexar provas (ordem, escala, quadro, declaração)<input type="file" accept="image/*,application/pdf" multiple></label>
+      <ul class="flist"></ul>
+    </div>
+  </div>
+</section>
+
+<!-- 6. SERVIÇOS GERAIS -->
+<section class="card" id="s6">
+  <h2><span class="n">6</span>Tarefas fora do cargo</h2>
+  <p class="hint">Já foi mandado(a) fazer limpeza, cozinha, portaria ou outra tarefa que não é do cargo?</p>
+  <div class="inline"><div class="opts">
+    <label class="opt"><input type="radio" name="sg" value="sim" data-cond="c_sg"><span>Sim</span></label>
+    <label class="opt"><input type="radio" name="sg" value="nao"><span>Não</span></label>
+  </div></div>
+  <div class="cond" id="c_sg">
+    <p class="se">Se respondeu “Sim”, conte os detalhes e anexe as provas:</p>
+    <label class="f">Quais tarefas?</label>
+    <div class="opts">
+      <label class="opt"><input type="checkbox" name="sg_tipo" value="limpeza"><span>Limpeza</span></label>
+      <label class="opt"><input type="checkbox" name="sg_tipo" value="cozinha"><span>Cozinha / merenda</span></label>
+      <label class="opt"><input type="checkbox" name="sg_tipo" value="portaria"><span>Portaria</span></label>
+      <label class="opt"><input type="checkbox" name="sg_tipo" value="outra"><span>Outra</span></label>
+    </div>
+    <label class="f" for="sg_freq">Com que frequência?</label>
+    <select id="sg_freq"><option value="">Selecione</option><option>Uma vez</option><option>Algumas vezes</option><option>Toda semana</option><option>Todos os dias</option></select>
+    <label class="f" for="sg_quem">Quem determinou?</label>
+    <select id="sg_quem"><option value="">Selecione</option><option>Direção</option><option>Coordenação pedagógica</option><option>SEMEC</option><option>Outro</option></select>
+    <label class="f" for="sg_desc">Comentários e detalhes <small>que tarefa, com que frequência, desde quando, quem determinou</small></label>
+    <textarea id="sg_desc" maxlength="2500"></textarea>
+    <div class="provas"><div class="pt">O que você pode enviar como prova</div><ul><li><b>Print da ordem</b> (WhatsApp, e-mail) para limpar, servir merenda, cuidar da portaria ou outra tarefa fora do cargo.</li><li><b>Escala de serviços, quadro de horários ou de atividades</b> em que seu nome aparece nessas tarefas.</li><li><b>Declaração assinada</b> por colega, pela direção ou pela coordenação que presenciou ou determinou.</li></ul></div>
+  <div class="files" data-field="servicos_gerais">
+      <label class="filebtn">＋ Anexar provas (ordem, escala, quadro, declaração)<input type="file" accept="image/*,application/pdf" multiple></label>
+      <ul class="flist"></ul>
+    </div>
+  </div>
+</section>
+
+<!-- 7. JORNADA -->
+<section class="card" id="s7">
+  <h2><span class="n">7</span>Jornada e quadro de pessoal</h2>
+  <label class="f">Como é sua jornada?</label>
+  <div class="opts">
+    <label class="opt"><input type="radio" name="jor" value="turno_unico"><span>Turno único (só manhã ou só tarde)</span></label>
+    <label class="opt"><input type="radio" name="jor" value="dois_turnos" data-cond="c_jor"><span>Dois turnos (manhã e tarde em alguns ou todos os dias)</span></label>
+  </div>
+  <div class="cond" id="c_jor">
+    <p class="se">Se trabalha em dois turnos:</p>
+    <label class="f" for="jor_horario">Horários <small>ex.: 7h–11h de segunda a sexta e 13h–17h às quintas e sextas</small></label>
+    <input type="text" id="jor_horario">
+    <label class="f">Disseram que a divisão em dois turnos é por falta de pessoal?</label>
+    <div class="inline"><div class="opts">
+      <label class="opt"><input type="radio" name="jor_falta" value="sim"><span>Sim</span></label>
+      <label class="opt"><input type="radio" name="jor_falta" value="nao"><span>Não</span></label>
+      <label class="opt"><input type="radio" name="jor_falta" value="nao_informado"><span>Não explicaram</span></label>
+    </div></div>
+  </div>
+  <p class="hint" style="margin-top:14px">Na sua unidade, no seu turno principal (números aproximados):</p>
+  <div class="row two">
+    <div><label class="f" for="q_prof">Professores no turno</label><input type="text" id="q_prof" inputmode="numeric"></div>
+    <div><label class="f" for="q_aux">Auxiliares no turno</label><input type="text" id="q_aux" inputmode="numeric"></div>
+  </div>
+  <label class="f" for="q_criancas">Crianças na sua turma</label>
+  <input type="text" id="q_criancas" inputmode="numeric">
+  <label class="f">Há turma sem professor na unidade?</label>
+  <div class="inline"><div class="opts">
+    <label class="opt"><input type="radio" name="q_semprof" value="sim"><span>Sim</span></label>
+    <label class="opt"><input type="radio" name="q_semprof" value="nao"><span>Não</span></label>
+    <label class="opt"><input type="radio" name="q_semprof" value="nao_sei"><span>Não sei</span></label>
+  </div></div>
+  <label class="f">Há turma sem auxiliar no turno da manhã?</label>
+  <div class="inline"><div class="opts">
+    <label class="opt"><input type="radio" name="q_semaux_m" value="sim"><span>Sim</span></label>
+    <label class="opt"><input type="radio" name="q_semaux_m" value="nao"><span>Não</span></label>
+    <label class="opt"><input type="radio" name="q_semaux_m" value="nao_sei"><span>Não sei</span></label>
+  </div></div>
+  <label class="f">Há turma sem auxiliar no turno da tarde?</label>
+  <div class="inline"><div class="opts">
+    <label class="opt"><input type="radio" name="q_semaux" value="sim"><span>Sim</span></label>
+    <label class="opt"><input type="radio" name="q_semaux" value="nao"><span>Não</span></label>
+    <label class="opt"><input type="radio" name="q_semaux" value="nao_sei"><span>Não sei</span></label>
+  </div></div>
+  <label class="f" for="q_turmas_semaux">Quantas turmas da sua unidade estão sem auxiliar? <small>contando manhã e tarde; se não souber, deixe em branco</small></label>
+  <input type="text" id="q_turmas_semaux" inputmode="numeric">
+  <label class="f" for="jor_desc">Comentários e detalhes <small>opcional</small></label>
+  <textarea id="jor_desc" maxlength="1000"></textarea>
+  <div class="provas"><div class="pt">O que você pode enviar como prova</div><ul><li><b>Ficha de encaminhamento de lotação</b> (mostra o campo “Turno(s)”, por exemplo “MANHÃ/TARDE”).</li><li><b>Folha de ponto ou de frequência</b> dos últimos meses.</li><li>Quadro de horários da unidade ou do seu turno.</li><li><b>Circular, orientação ou mensagem da SEMEC ou da direção</b> sobre a dupla jornada, sobretudo se mencionar um parecer da Procuradoria (PGM).</li><li>Mensagem em que justificam a divisão em dois turnos por <b>falta de pessoal</b>.</li><li><b>Quadro de pessoal ou de turmas</b> da unidade (quantos professores e auxiliares por turno e quais turmas estão sem auxiliar).</li><li><b>Quadro de atividades</b> da unidade ou da turma.</li><li><b>Declaração da direção</b> sobre a sua jornada, os turnos de trabalho e as turmas sem auxiliar.</li></ul></div>
+  <div class="files" data-field="jornada">
+    <label class="filebtn">＋ Anexar provas (ficha de lotação, ponto, quadros, circulares, declarações)<input type="file" accept="image/*,application/pdf" multiple></label>
+    <ul class="flist"></ul>
+  </div>
+</section>
+
+<!-- 8. OUTROS DOCUMENTOS -->
+<section class="card" id="s8">
+  <h2><span class="n">8</span>Outros documentos</h2>
+  <label class="f">Já fez requerimento à SEMEC sobre jornada, atribuições ou enquadramento?</label>
+  <div class="inline"><div class="opts">
+    <label class="opt"><input type="radio" name="req" value="sim" data-cond="c_req"><span>Sim</span></label>
+    <label class="opt"><input type="radio" name="req" value="nao"><span>Não</span></label>
+  </div></div>
+  <div class="cond" id="c_req">
+    <p class="se">Se fez requerimento:</p>
+    <div class="row two">
+      <div><label class="f" for="req_sei">Nº do processo SEI <small>se tiver</small></label><input type="text" id="req_sei"></div>
+      <div><label class="f" for="req_resp">Teve resposta?</label>
+        <select id="req_resp"><option value="">Selecione</option><option>Sim, deferido</option><option>Sim, indeferido</option><option>Ainda sem resposta</option></select></div>
+    </div>
+    <div class="provas"><div class="pt">O que você pode enviar como prova</div><ul><li>O <b>requerimento</b> que você protocolou na SEMEC, com o número do processo SEI.</li><li>A <b>resposta</b> da SEMEC ou o andamento do processo, se houver.</li></ul></div>
+  <div class="files" data-field="requerimento">
+      <label class="filebtn">＋ Anexar requerimento ou resposta<input type="file" accept="image/*,application/pdf" multiple></label>
+      <ul class="flist"></ul>
+    </div>
+  </div>
+  <label class="f" style="margin-top:16px">Declarações e quadros de horários / atividades</label>
+  <div class="provas"><div class="pt">O que você pode enviar aqui</div><ul><li><b>Declarações assinadas</b> por colegas, pela direção ou pela coordenação sobre a sua rotina, as suas atividades, a jornada ou as situações descritas acima.</li><li><b>Quadro de horários</b> da unidade, da turma ou o seu.</li><li><b>Quadro de atividades ou rotina</b> da turma ou da unidade.</li><li>Qualquer outro documento que ajude a mostrar o que você faz no dia a dia.</li></ul>
+  <div class="pd"><b>Dica:</b> a declaração deve ter nome, cargo e assinatura de quem declara, data e fatos concretos (turma, horário, o que acontece).</div></div>
+  <div class="files" data-field="declaracoes_quadros">
+    <label class="filebtn">＋ Anexar declarações e quadros<input type="file" accept="image/*,application/pdf" multiple></label>
+    <ul class="flist"></ul>
+  </div>
+  <label class="f" style="margin-top:16px">Contracheque recente <small>opcional – um basta</small></label>
+  <div class="provas"><div class="pt">O que você pode enviar como prova</div><ul><li>Um <b>contracheque recente</b>, que mostra o vencimento e a carga horária. Não é preciso enviar vários.</li></ul></div>
+  <div class="files" data-field="contracheque">
+    <label class="filebtn">＋ Anexar contracheque<input type="file" accept="image/*,application/pdf" multiple></label>
+    <ul class="flist"></ul>
+  </div>
+  <label class="f" for="relato">Algo mais que o Sindicato precise saber? <small>opcional</small></label>
+  <textarea id="relato" maxlength="1500"></textarea>
+</section>
+
+<!-- 9. AUTORIZAÇÕES -->
+<section class="card" id="s9">
+  <h2><span class="n">9</span>Autorizações</h2>
+  <div class="opts">
+    <label class="opt"><input type="checkbox" id="ok_lgpd"><span><b>Autorizo</b> o SINDSERM Teresina e sua Assessoria Jurídica a usar estas informações e documentos na defesa da categoria, no Procedimento Administrativo nº 69/2026 do MPPI e em processos relacionados, apresentando-os de forma consolidada. <span class="req" style="color:var(--err)">*</span></span></label>
+    <label class="opt"><input type="checkbox" id="ok_docs"><span>Autorizo também que meus documentos individuais sejam apresentados ao Ministério Público, se necessário, <b>com pedido de sigilo</b> da minha identidade. <small>Opcional</small></span></label>
+    <label class="opt"><input type="checkbox" id="ok_verdade"><span>Declaro que as informações são verdadeiras. <span style="color:var(--err)">*</span></span></label>
+    <label class="opt"><input type="checkbox" id="ok_criancas"><span>Confirmo que não enviei fotos, vídeos ou laudos de crianças e que cobri (tarjei) os nomes de crianças nos documentos enviados. <span style="color:var(--err)">*</span></span></label>
+  </div>
+  <div class="errmsg" data-for="autorizacoes">Marque as autorizações obrigatórias para continuar.</div>
+</section>
+
+<section class="card" id="s10">
+  <div class="notice err hidden" id="formerr"></div>
+  <button type="submit" class="btn" id="gerar">Gerar pacote</button>
+  <p class="hint" style="margin:10px 0 0;text-align:center">O pacote é montado no seu aparelho. Na próxima etapa você o envia por e-mail.</p>
+</section>
+</form>
+
+<!-- ENVIO -->
+<section class="card hidden" id="envio" aria-live="polite">
+  <h2><span class="n">✓</span>Pacote pronto. Falta enviar!</h2>
+  <div class="notice ok" id="pkginfo"></div>
+  <p style="margin:8px 0 6px"><b>Envie o pacote para o e-mail da Assessoria Jurídica:</b></p>
+  <div class="addr"><span id="addr"></span><button type="button" id="copiar">Copiar e-mail</button></div>
+
+  <div id="viaShare" class="hidden">
+    <ol class="steps">
+      <li>Toque em <b>“Enviar pelo e-mail do celular”</b> e escolha o seu aplicativo de e-mail (Gmail, Outlook…).</li>
+      <li>No campo <b>Para</b>, cole o endereço acima (ele já foi copiado).</li>
+      <li>Confira se o arquivo <b id="fn1"></b> está anexado e toque em <b>Enviar</b>.</li>
+    </ol>
+    <button type="button" class="btn" id="btnShare">Enviar pelo e-mail do celular</button>
+    <p class="hint" style="margin:14px 0 4px;text-align:center">Não funcionou? Use o caminho abaixo.</p>
+  </div>
+
+  <ol class="steps" id="stepsDl">
+    <li>Toque em <b>“Baixar pacote”</b> e salve o arquivo <b id="fn2"></b>.</li>
+    <li>Toque em <b>“Abrir e-mail preenchido”</b>: o destinatário, o assunto e um resumo já vêm prontos.</li>
+    <li><b>Anexe o arquivo baixado</b> ao e-mail e envie.</li>
+  </ol>
+  <a class="btn sec" id="btnDl" href="#" download>Baixar pacote (.zip)</a>
+  <a class="btn sec" id="btnMail" href="#">Abrir e-mail preenchido</a>
+  <div class="notice warn" style="margin-top:14px">Se o arquivo ficar grande demais para o e-mail, envie mesmo assim o e-mail com o resumo e mande os documentos em um segundo e-mail.</div>
+  <button type="button" class="btn sec" id="voltar">Voltar e corrigir</button>
+</section>
+</main>
+
+<footer>
+  Formulário da Assessoria Jurídica do SINDSERM Teresina para instruir o Procedimento Administrativo nº 69/2026 (MPPI). Esta página não armazena dados: o pacote é gerado no seu aparelho e só chega à Assessoria quando você o envia por e-mail.
+</footer>
+
+<script>
+(function(){
+'use strict';
+// destinatário (montado em partes para dificultar a coleta automática por robôs de spam)
+var DEST = ['auxedusindsermteresina', 'gmail.com'].join('@');
+var VERSAO = '1.0';
+var MAX_TOTAL = 19 * 1024 * 1024;   // limite prático de anexo em e-mail
+
+var $ = function(s, r){ return (r || document).querySelector(s); };
+var $$ = function(s, r){ return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+var form = $('#f');
+
+// ---------- condicionais ----------
+function syncCond(){
+  $$('[data-cond]').forEach(function(inp){
+    var box = document.getElementById(inp.dataset.cond);
+    if (!box) return;
+    var group = $$('input[name="' + inp.name + '"]');
+    var on = inp.checked;
+    if (inp.type === 'radio') on = group.some(function(g){ return g.checked && g.dataset.cond === inp.dataset.cond; });
+    box.classList.toggle('on', on);
+  });
+}
+form.addEventListener('change', syncCond);
+
+// ---------- máscaras ----------
+function digits(s){ return (s || '').replace(/\D/g, ''); }
+$('#cpf').addEventListener('input', function(e){
+  var d = digits(e.target.value).slice(0, 11), o = d;
+  if (d.length > 9) o = d.slice(0,3)+'.'+d.slice(3,6)+'.'+d.slice(6,9)+'-'+d.slice(9);
+  else if (d.length > 6) o = d.slice(0,3)+'.'+d.slice(3,6)+'.'+d.slice(6);
+  else if (d.length > 3) o = d.slice(0,3)+'.'+d.slice(3);
+  e.target.value = o;
+});
+$('#telefone').addEventListener('input', function(e){
+  var d = digits(e.target.value).slice(0, 11), o = d;
+  if (d.length > 6) o = '(' + d.slice(0,2) + ') ' + d.slice(2, d.length - 4) + '-' + d.slice(d.length - 4);
+  else if (d.length > 2) o = '(' + d.slice(0,2) + ') ' + d.slice(2);
+  e.target.value = o;
+});
+function cpfValido(c){
+  c = digits(c);
+  if (c.length !== 11 || /^(\d)\1{10}$/.test(c)) return false;
+  for (var t = 9; t < 11; t++){
+    var s = 0;
+    for (var i = 0; i < t; i++) s += parseInt(c[i], 10) * (t + 1 - i);
+    var dv = (s * 10) % 11 % 10;
+    if (dv !== parseInt(c[t], 10)) return false;
+  }
+  return true;
+}
+
+// ---------- anexos ----------
+var FILES = {};   // campo -> [File]
+$$('.files').forEach(function(box){
+  var field = box.dataset.field;
+  FILES[field] = [];
+  var input = $('input[type=file]', box), list = $('.flist', box);
+  function render(){
+    list.innerHTML = '';
+    FILES[field].forEach(function(f, i){
+      var li = document.createElement('li');
+      var sp = document.createElement('span');
+      sp.textContent = f.name + ' (' + fmtSize(f.size) + ')';
+      var b = document.createElement('button');
+      b.type = 'button'; b.textContent = 'remover';
+      b.setAttribute('aria-label', 'Remover ' + f.name);
+      b.addEventListener('click', function(){ FILES[field].splice(i, 1); render(); });
+      li.appendChild(sp); li.appendChild(b); list.appendChild(li);
+    });
+  }
+  input.addEventListener('change', function(){
+    Array.prototype.forEach.call(input.files, function(f){ FILES[field].push(f); });
+    input.value = '';
+    render();
+  });
+});
+function fmtSize(n){ return n > 1048576 ? (n / 1048576).toFixed(1) + ' MB' : Math.max(1, Math.round(n / 1024)) + ' KB'; }
+
+// ---------- leitura do formulário ----------
+function val(id){ var el = document.getElementById(id); return el ? el.value.trim() : ''; }
+function radio(name){ var r = $('input[name="' + name + '"]:checked'); return r ? r.value : ''; }
+function checks(name){ return $$('input[name="' + name + '"]:checked').map(function(c){ return c.value; }); }
+
+function coletar(){
+  var form_ = checks('form');
+  var reg = radio('reg'), esp = radio('esp'), sg = radio('sg'), jor = radio('jor'), req = radio('req');
+  return {
+    versao: VERSAO,
+    formulario: 'Auxiliares Educacionais – PA 69/2026 (SIMP 001806-426/2026) – SINDSERM Teresina',
+    enviado_em: new Date().toISOString(),
+    identificacao: {
+      nome: val('nome'), cpf: digits(val('cpf')), matricula: val('matricula'), email: val('email'),
+      telefone: digits(val('telefone')), cmei: val('cmei'), turma: val('turma'), data_posse: val('posse')
+    },
+    formacao: {
+      itens: form_,
+      outra_licenciatura: val('outra_curso'),
+      cursando: (form_.indexOf('cursando') >= 0 || val('cursando_curso')) ? { curso: val('cursando_curso'), previsao: val('cursando_prev') } : null
+    },
+    regencia_solitaria: {
+      ocorreu: reg, frequencia: val('reg_freq'), periodo: val('reg_periodo'), motivos: checks('reg_motivo'),
+      quem_determinou: val('reg_quem'), forma_da_ordem: checks('reg_forma'), descricao: val('reg_desc')
+    },
+    atuacao_pedagogica: { planejamento: radio('ped_plan'), relatorios_avaliacoes: radio('ped_reg'), convocado_formacao: radio('ped_form'), comentarios: val('ped_desc') },
+    educacao_especial: {
+      turmas: $$('#esp_turmas .trow:not(.thead)').map(function(r){
+        return { turma: $('.t_turma', r).value.trim(), criancas_educacao_especial: $('.t_criancas', r).value.trim(), profissionais_de_apoio: $('.t_apoio', r).value.trim() };
+      }).filter(function(t){ return t.turma || t.criancas_educacao_especial || t.profissionais_de_apoio; }),
+      acompanha_exclusivo: esp, desde: val('esp_desde'), ha_profissional_apoio: radio('esp_apoio'), quem_determinou: val('esp_quem'), descricao: val('esp_desc')
+    },
+    tarefas_fora_do_cargo: {
+      ocorre: sg, tipos: checks('sg_tipo'), frequencia: val('sg_freq'), quem_determinou: val('sg_quem'), descricao: val('sg_desc')
+    },
+    jornada: {
+      regime: jor,
+      horarios: val('jor_horario'),
+      divisao_por_falta_de_pessoal: radio('jor_falta'),
+      professores_no_turno: val('q_prof'), auxiliares_no_turno: val('q_aux'), criancas_na_turma: val('q_criancas'),
+      turma_sem_professor: radio('q_semprof'), turma_sem_auxiliar_manha: radio('q_semaux_m'), turma_sem_auxiliar_tarde: radio('q_semaux'),
+      turmas_sem_auxiliar_na_unidade: val('q_turmas_semaux'), comentarios: val('jor_desc')
+    },
+    requerimento_semec: { fez: req, sei: val('req_sei'), resposta: val('req_resp') },
+    relato_livre: val('relato'),
+    autorizacoes: {
+      uso_consolidado: $('#ok_lgpd').checked, documentos_individuais_com_sigilo: $('#ok_docs').checked,
+      veracidade: $('#ok_verdade').checked, sem_dados_de_criancas: $('#ok_criancas').checked
+    },
+    arquivos: []
+  };
+}
+
+// ---------- validação ----------
+function marca(id, ok){
+  var el = document.getElementById(id); if (el) el.classList.toggle('invalid', !ok);
+  var m = $('.errmsg[data-for="' + id + '"]'); if (m) m.classList.toggle('show', !ok);
+  return ok;
+}
+function validar(){
+  var ok = true, primeiro = null;
+  function chk(id, cond){ var r = marca(id, cond); if (!r){ ok = false; primeiro = primeiro || id; } }
+  chk('nome', val('nome').split(/\s+/).filter(Boolean).length >= 2);
+  chk('cpf', cpfValido(val('cpf')));
+  chk('matricula', val('matricula').length >= 2);
+  chk('email', /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(val('email')));
+  chk('telefone', digits(val('telefone')).length >= 10);
+  chk('cmei', val('cmei').length >= 2);
+  chk('formacao', checks('form').length > 0);
+  chk('autorizacoes', $('#ok_lgpd').checked && $('#ok_verdade').checked && $('#ok_criancas').checked);
+  if (!ok){
+    var el = document.getElementById(primeiro) || $('.errmsg[data-for="' + primeiro + '"]');
+    if (el){ el.scrollIntoView({ behavior: 'smooth', block: 'center' }); if (el.focus) el.focus({ preventScroll: true }); }
+  }
+  return ok;
+}
+
+// ---------- imagens: reduz antes de empacotar ----------
+function reduzirImagem(file){
+  return new Promise(function(resolve){
+    if (!/^image\/(jpeg|png|webp|heic|heif)$/i.test(file.type) && !/\.(jpe?g|png|webp|heic|heif)$/i.test(file.name)) return resolve(null);
+    var url = URL.createObjectURL(file), img = new Image();
+    img.onload = function(){
+      try {
+        var max = 1800, w = img.naturalWidth, h = img.naturalHeight, s = Math.min(1, max / Math.max(w, h));
+        var c = document.createElement('canvas'); c.width = Math.round(w * s); c.height = Math.round(h * s);
+        var ctx = c.getContext('2d'); ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, c.width, c.height);
+        ctx.drawImage(img, 0, 0, c.width, c.height);
+        c.toBlob(function(b){ URL.revokeObjectURL(url); resolve(b && b.size < file.size ? b : null); }, 'image/jpeg', 0.8);
+      } catch (e){ URL.revokeObjectURL(url); resolve(null); }
+    };
+    img.onerror = function(){ URL.revokeObjectURL(url); resolve(null); };
+    img.src = url;
+  });
+}
+
+// ---------- ZIP (sem compressão; imagens e PDFs já são comprimidos) ----------
+var CRC = (function(){ var t = new Uint32Array(256); for (var n = 0; n < 256; n++){ var c = n; for (var k = 0; k < 8; k++) c = c & 1 ? 0xEDB88320 ^ (c >>> 1) : c >>> 1; t[n] = c >>> 0; } return t; })();
+function crc32(u8){ var c = 0xFFFFFFFF; for (var i = 0; i < u8.length; i++) c = CRC[(c ^ u8[i]) & 0xFF] ^ (c >>> 8); return (c ^ 0xFFFFFFFF) >>> 0; }
+function zip(entries){   // entries: [{name, data: Uint8Array}]
+  var enc = new TextEncoder(), parts = [], central = [], offset = 0;
+  var d = new Date(), dt = ((d.getHours() << 11) | (d.getMinutes() << 5) | (d.getSeconds() >> 1)) & 0xFFFF,
+      dd = (((d.getFullYear() - 1980) << 9) | ((d.getMonth() + 1) << 5) | d.getDate()) & 0xFFFF;
+  entries.forEach(function(e){
+    var name = enc.encode(e.name), crc = crc32(e.data), size = e.data.length;
+    var lh = new DataView(new ArrayBuffer(30));
+    lh.setUint32(0, 0x04034b50, true); lh.setUint16(4, 20, true); lh.setUint16(6, 0x0800, true); lh.setUint16(8, 0, true);
+    lh.setUint16(10, dt, true); lh.setUint16(12, dd, true); lh.setUint32(14, crc, true); lh.setUint32(18, size, true);
+    lh.setUint32(22, size, true); lh.setUint16(26, name.length, true); lh.setUint16(28, 0, true);
+    parts.push(new Uint8Array(lh.buffer), name, e.data);
+    var ch = new DataView(new ArrayBuffer(46));
+    ch.setUint32(0, 0x02014b50, true); ch.setUint16(4, 20, true); ch.setUint16(6, 20, true); ch.setUint16(8, 0x0800, true);
+    ch.setUint16(10, 0, true); ch.setUint16(12, dt, true); ch.setUint16(14, dd, true); ch.setUint32(16, crc, true);
+    ch.setUint32(20, size, true); ch.setUint32(24, size, true); ch.setUint16(28, name.length, true);
+    ch.setUint16(30, 0, true); ch.setUint16(32, 0, true); ch.setUint16(34, 0, true); ch.setUint16(36, 0, true);
+    ch.setUint32(38, 0, true); ch.setUint32(42, offset, true);
+    central.push(new Uint8Array(ch.buffer), name);
+    offset += 30 + name.length + size;
+  });
+  var csize = central.reduce(function(a, p){ return a + p.length; }, 0);
+  var end = new DataView(new ArrayBuffer(22));
+  end.setUint32(0, 0x06054b50, true); end.setUint16(8, entries.length, true); end.setUint16(10, entries.length, true);
+  end.setUint32(12, csize, true); end.setUint32(16, offset, true);
+  return new Blob(parts.concat(central, [new Uint8Array(end.buffer)]), { type: 'application/zip' });
+}
+
+function semAcento(s){ return (s || '').normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^A-Za-z0-9 ._-]/g, '').trim(); }
+function ext(f, reduzido){ if (reduzido) return 'jpg'; var m = /\.([A-Za-z0-9]{1,5})$/.exec(f.name); return m ? m[1].toLowerCase() : (f.type === 'application/pdf' ? 'pdf' : 'bin'); }
+function lista(a){ return a && a.length ? a.join(', ') : '—'; }
+var LBL = { sim:'sim', nao:'não', as_vezes:'às vezes', nao_sei:'não sei', nao_informado:'não explicaram', turno_unico:'turno único', dois_turnos:'dois turnos',
+  falta_do_professor:'falta do professor', licenca_do_professor:'licença/afastamento do professor', turma_sem_professor:'turma sem professor', outro:'outro',
+  verbal:'verbal', whatsapp:'WhatsApp', escrito:'por escrito', limpeza:'limpeza', cozinha:'cozinha/merenda', portaria:'portaria', outra:'outra' };
+function lb(x){ return x ? (LBL[x] || x) : '—'; }
+function lbl(a){ return a && a.length ? a.map(lb).join(', ') : '—'; }
+var ROT = { ensino_medio_regular: 'ensino médio regular', normal_concluido: 'curso normal/magistério concluído', pedagogia_concluida: 'Pedagogia concluída',
+  outra_licenciatura: 'outra licenciatura', cursando: 'cursando', pos_educacao: 'pós-graduação em educação' };
+
+function textoFicha(d){
+  var i = d.identificacao, L = [];
+  L.push('FICHA – AUXILIAR EDUCACIONAL – PA 69/2026 (SIMP 001806-426/2026)');
+  L.push('Gerada em: ' + new Date(d.enviado_em).toLocaleString('pt-BR'));
+  L.push('');
+  L.push('1. IDENTIFICAÇÃO');
+  L.push('Nome: ' + i.nome); L.push('CPF: ' + i.cpf); L.push('Matrícula: ' + i.matricula);
+  L.push('E-mail: ' + i.email); L.push('Telefone: ' + i.telefone); L.push('CMEI: ' + i.cmei);
+  L.push('Turma(s): ' + (i.turma || '—')); L.push('Posse: ' + (i.data_posse || '—'));
+  L.push(''); L.push('2. FORMAÇÃO: ' + lista(d.formacao.itens.map(function(x){ return ROT[x] || x; })));
+  if (d.formacao.outra_licenciatura) L.push('Outra licenciatura: ' + d.formacao.outra_licenciatura);
+  if (d.formacao.cursando) L.push('Cursando: ' + d.formacao.cursando.curso + ' (previsão: ' + (d.formacao.cursando.previsao || '—') + ')');
+  var r = d.regencia_solitaria;
+  L.push(''); L.push('3. REGÊNCIA SOLITÁRIA: ' + (r.ocorreu ? lb(r.ocorreu) : 'não respondeu'));
+  if (r.ocorreu === 'sim' || r.descricao || r.periodo){ L.push('Frequência: ' + (r.frequencia || '—') + ' | Período: ' + (r.periodo || '—')); L.push('Motivos: ' + lbl(r.motivos) + ' | Quem determinou: ' + (r.quem_determinou || '—') + ' | Forma: ' + lbl(r.forma_da_ordem)); if (r.descricao) L.push('Descrição: ' + r.descricao); }
+  var p = d.atuacao_pedagogica;
+  L.push(''); L.push('4. ATUAÇÃO PEDAGÓGICA: planejamento ' + lb(p.planejamento) + ' | relatórios/avaliações ' + lb(p.relatorios_avaliacoes) + ' | convocado(a) para formação ' + lb(p.convocado_formacao));
+  if (p.comentarios) L.push('Comentários: ' + p.comentarios);
+  var e = d.educacao_especial;
+  L.push(''); L.push('5. EDUCAÇÃO ESPECIAL');
+  (e.turmas || []).forEach(function(t){ L.push('Turma ' + (t.turma || '—') + ': quantidade de crianças da educação especial (com laudo) ' + (t.criancas_educacao_especial || '—') + ' | quantidade de profissionais de apoio ' + (t.profissionais_de_apoio || '—')); });
+  L.push('Acompanhamento exclusivo: ' + (e.acompanha_exclusivo ? lb(e.acompanha_exclusivo) : 'não respondeu'));
+  if (e.acompanha_exclusivo === 'sim' || e.descricao || e.desde){ L.push('Desde: ' + (e.desde || '—') + ' | Profissional de apoio na unidade: ' + lb(e.ha_profissional_apoio) + ' | Quem determinou: ' + (e.quem_determinou || '—')); if (e.descricao) L.push('Descrição: ' + e.descricao); }
+  var s = d.tarefas_fora_do_cargo;
+  L.push(''); L.push('6. TAREFAS FORA DO CARGO: ' + (s.ocorre ? lb(s.ocorre) : 'não respondeu'));
+  if (s.ocorre === 'sim' || s.descricao || (s.tipos && s.tipos.length)){ L.push('Tipos: ' + lbl(s.tipos) + ' | Frequência: ' + (s.frequencia || '—') + ' | Quem determinou: ' + (s.quem_determinou || '—')); if (s.descricao) L.push('Descrição: ' + s.descricao); }
+  var j = d.jornada;
+  L.push(''); L.push('7. JORNADA: ' + (j.regime ? lb(j.regime) : 'não respondeu') + (j.horarios ? ' | Horários: ' + j.horarios : '') + (j.divisao_por_falta_de_pessoal ? ' | Disseram que é por falta de pessoal: ' + lb(j.divisao_por_falta_de_pessoal) : ''));
+  L.push('Professores no turno: ' + (j.professores_no_turno || '—') + ' | Auxiliares no turno: ' + (j.auxiliares_no_turno || '—') + ' | Crianças na turma: ' + (j.criancas_na_turma || '—'));
+  L.push('Turma sem professor: ' + lb(j.turma_sem_professor) + ' | Turma sem auxiliar de manhã: ' + lb(j.turma_sem_auxiliar_manha) + ' | à tarde: ' + lb(j.turma_sem_auxiliar_tarde) + ' | Turmas sem auxiliar na unidade: ' + (j.turmas_sem_auxiliar_na_unidade || '—'));
+  if (j.comentarios) L.push('Comentários: ' + j.comentarios);
+  var q = d.requerimento_semec;
+  L.push(''); L.push('8. REQUERIMENTO À SEMEC: ' + (q.fez ? lb(q.fez) : 'não respondeu') + (q.sei ? ' | SEI ' + q.sei : '') + (q.resposta ? ' | ' + q.resposta : ''));
+  if (d.relato_livre) { L.push(''); L.push('RELATO: ' + d.relato_livre); }
+  var a = d.autorizacoes;
+  L.push(''); L.push('9. AUTORIZAÇÕES: uso consolidado ' + (a.uso_consolidado ? 'SIM' : 'NÃO') + ' | documentos individuais com sigilo ' + (a.documentos_individuais_com_sigilo ? 'SIM' : 'NÃO') + ' | veracidade ' + (a.veracidade ? 'SIM' : 'NÃO') + ' | sem dados de crianças ' + (a.sem_dados_de_criancas ? 'SIM' : 'NÃO'));
+  L.push(''); L.push('ARQUIVOS ANEXADOS (' + d.arquivos.length + '):');
+  d.arquivos.forEach(function(f){ L.push('- ' + f.arquivo + '  [' + f.campo + '; original: ' + f.nome_original + ']'); });
+  return L.join('\r\n');
+}
+
+function resumoEmail(d, nomeZip){
+  var i = d.identificacao, L = [];
+  L.push('Segue meu pacote de informações para o PA 69/2026 (MPPI).');
+  L.push('');
+  L.push('Nome: ' + i.nome); L.push('CPF: ' + i.cpf); L.push('Matrícula: ' + i.matricula); L.push('CMEI: ' + i.cmei);
+  L.push('Formação: ' + lista(d.formacao.itens.map(function(x){ return ROT[x] || x; })));
+  L.push('Regência solitária: ' + lb(d.regencia_solitaria.ocorreu));
+  L.push('Educação especial (exclusivo): ' + lb(d.educacao_especial.acompanha_exclusivo));
+  L.push('Tarefas fora do cargo: ' + lb(d.tarefas_fora_do_cargo.ocorre));
+  L.push('Jornada: ' + lb(d.jornada.regime));
+  L.push('Arquivos no pacote: ' + d.arquivos.length);
+  L.push('');
+  L.push('Anexo: ' + nomeZip);
+  return L.join('\n');
+}
+
+var ZIPFILE = null;
+form.addEventListener('submit', async function(ev){
+  ev.preventDefault();
+  var errBox = $('#formerr'); errBox.classList.add('hidden');
+  if (!validar()) return;
+  var btn = $('#gerar'); btn.disabled = true; btn.textContent = 'Montando o pacote…';
+  try {
+    var dados = coletar(), entries = [], enc = new TextEncoder(), cont = {}, total = 0;
+    for (var campo in FILES){
+      for (var k = 0; k < FILES[campo].length; k++){
+        var f = FILES[campo][k], red = await reduzirImagem(f), blob = red || f;
+        cont[campo] = (cont[campo] || 0) + 1;
+        var nome = campo + '_' + String(cont[campo]).padStart(2, '0') + '.' + ext(f, !!red);
+        var u8 = new Uint8Array(await blob.arrayBuffer());
+        total += u8.length;
+        entries.push({ name: 'documentos/' + nome, data: u8 });
+        dados.arquivos.push({ campo: campo, arquivo: 'documentos/' + nome, nome_original: f.name, bytes: u8.length, reduzido: !!red });
+      }
+    }
+    var i = dados.identificacao;
+    var dn = new Date(), pad = function(n){ return String(n).padStart(2, '0'); };
+    var carimbo = dn.getFullYear() + pad(dn.getMonth() + 1) + pad(dn.getDate()) + '-' + pad(dn.getHours()) + pad(dn.getMinutes());
+    var base = 'SINDSERM_AE_' + i.cpf + '_' + semAcento(i.nome).toUpperCase().replace(/\s+/g, '_').slice(0, 40) + '_' + carimbo;
+    entries.unshift({ name: 'ficha.txt', data: enc.encode(textoFicha(dados)) });
+    entries.unshift({ name: 'ficha.json', data: enc.encode(JSON.stringify(dados, null, 2)) });
+    var blobZip = zip(entries), nomeZip = base + '.zip';
+    ZIPFILE = new File([blobZip], nomeZip, { type: 'application/zip' });
+
+    $('#pkginfo').textContent = 'Arquivo: ' + nomeZip + ' · ' + fmtSize(blobZip.size) + ' · ' + dados.arquivos.length + ' documento(s) anexado(s).';
+    $('#addr').textContent = DEST;
+    $('#fn1').textContent = nomeZip; $('#fn2').textContent = nomeZip;
+    var url = URL.createObjectURL(blobZip);
+    var dl = $('#btnDl'); dl.href = url; dl.download = nomeZip;
+    var assunto = 'PA 69/2026 – Auxiliar Educacional – ' + i.nome + ' – mat. ' + i.matricula;
+    $('#btnMail').href = 'mailto:' + DEST + '?subject=' + encodeURIComponent(assunto) + '&body=' + encodeURIComponent(resumoEmail(dados, nomeZip));
+    var podeShare = !!(navigator.canShare && navigator.canShare({ files: [ZIPFILE] }));
+    $('#viaShare').classList.toggle('hidden', !podeShare);
+    $('#btnShare').onclick = async function(){
+      try { await navigator.clipboard.writeText(DEST); } catch (e) {}
+      try { await navigator.share({ files: [ZIPFILE], title: assunto, text: resumoEmail(dados, nomeZip) }); } catch (e) {}
+    };
+    if (blobZip.size > MAX_TOTAL){
+      $('#pkginfo').textContent += ' Atenção: o pacote passou de 19 MB e pode ser recusado pelo e-mail. Se isso acontecer, volte, retire alguns documentos e envie-os em outro e-mail.';
+      $('#pkginfo').className = 'notice warn';
+    } else { $('#pkginfo').className = 'notice ok'; }
+    form.classList.add('hidden');
+    $('#envio').classList.remove('hidden');
+    window.scrollTo({ top: $('#envio').offsetTop - 10, behavior: 'smooth' });
+  } catch (e){
+    errBox.textContent = 'Não foi possível montar o pacote neste aparelho (' + (e && e.message ? e.message : e) + '). Tente em outro navegador ou envie os documentos diretamente por e-mail para ' + DEST + '.';
+    errBox.classList.remove('hidden');
+  } finally {
+    btn.disabled = false; btn.textContent = 'Gerar pacote';
+  }
+});
+$('#copiar').addEventListener('click', async function(){
+  try { await navigator.clipboard.writeText(DEST); this.textContent = 'Copiado!'; } catch (e){ this.textContent = 'Copie manualmente'; }
+});
+$('#voltar').addEventListener('click', function(){
+  $('#envio').classList.add('hidden'); form.classList.remove('hidden'); window.scrollTo({ top: 0 });
+});
+$('#esp_add').addEventListener('click', function(){
+  var tb = $('#esp_turmas'), rows = $$('.trow:not(.thead)', tb), novo = rows[rows.length - 1].cloneNode(true);
+  $$('input', novo).forEach(function(i){ i.value = ''; });
+  tb.appendChild(novo); $('input', novo).focus();
+});
+syncCond();
+})();
+</script>
+</body>
+</html>
